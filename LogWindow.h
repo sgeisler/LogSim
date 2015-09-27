@@ -29,8 +29,8 @@ public:
 	LogWindow();
 	virtual ~LogWindow();
 
-    //wird zu Beginn aufgerufen, läuft bis das Fenster geschlossen wird
-    //hier wird die Eventverarbeitung und das Rendering durchgeführt
+    //wird zu Beginn aufgerufen, lï¿½uft bis das Fenster geschlossen wird
+    //hier wird die Eventverarbeitung und das Rendering durchgefï¿½hrt
 	void run();
 private:
     //Fenster, in das gezeichnet wird
@@ -50,12 +50,12 @@ private:
     //gibt an, ob Verbindungen gewinkelt oder direkt gezeichnet werden
     bool wireStyle;
 
-    //gibt an, ob gerade ein Gatter hinzugefügt wird (wenn ja, dann >=0)
+    //gibt an, ob gerade ein Gatter hinzugefï¿½gt wird (wenn ja, dann >=0)
     //und welches typs es ist.
     int addGateType;
 
 
-    //Rotations-/Transformationsmatritzen für Menü und Zeichenfläche
+    //Rotations-/Transformationsmatritzen fï¿½r Menï¿½ und Zeichenflï¿½che
     sf::View menue;
     sf::View simulation;
 
@@ -71,7 +71,7 @@ private:
 	//zeichnet eine Verbindung
 	void drawConnection(sf::Vector2f from, sf::Vector2f to);
 
-    //liefert einen Zeiger auf das Gatter unter dem Mauszeiger zurück
+    //liefert einen Zeiger auf das Gatter unter dem Mauszeiger zurï¿½ck
 	Gate* getFocusedGate();
 };
 

@@ -20,7 +20,7 @@ public:
 	LogEnv();
 	virtual ~LogEnv();
 
-    //führt einen Simulationsschritt aus
+    //fï¿½hrt einen Simulationsschritt aus
 	void step();
 protected:
 

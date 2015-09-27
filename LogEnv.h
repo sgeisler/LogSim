@@ -9,6 +9,7 @@
 #define LOGENV_H_
 
 #include "Gate.h"
+#include <string>
 #include <vector>
 
 using namespace std;
@@ -22,6 +23,11 @@ public:
 
     //f�hrt einen Simulationsschritt aus
 	void step();
+
+    void load(std::string file);
+
+    void save(std::string file);
+
 protected:
 
     //beinhaltet die Pointer auf alle Gatter

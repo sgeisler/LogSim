@@ -25,7 +25,6 @@ LogWindow::~LogWindow() {
 
 void LogWindow::run()
 {
-
     //initialisieren des Fensters
 	wnd.create(sf::VideoMode(800, 600), "LogSim 0.1");
     wnd.display();
@@ -33,12 +32,12 @@ void LogWindow::run()
     wnd.setFramerateLimit(60);
 
     //views einrichten (Menuegroesse, Zeichenflaeche)
-    menue.setSize(wnd.getSize().x, 100.0f);
-    menue.setCenter(wnd.getSize().x / 2.0f, 50.0f);
-    menue.setViewport(sf::FloatRect(0.0f, 0.0f, 1.0f, 100.0f / wnd.getSize().y));
+    menue.setSize(wnd.getSize().x, 130.0f);
+    menue.setCenter(wnd.getSize().x / 2.0f, 65.0f);
+    menue.setViewport(sf::FloatRect(0.0f, 0.0f, 1.0f, 130.0f / wnd.getSize().y));
 
-    simulation.setSize(wnd.getSize().x, wnd.getSize().y - 100.0f);
-    simulation.setViewport(sf::FloatRect(0.0f, 100.0f / wnd.getSize().y, 1.0f, 1.0f - (100.0f / wnd.getSize().y)));
+    simulation.setSize(wnd.getSize().x, wnd.getSize().y - 130.0f);
+    simulation.setViewport(sf::FloatRect(0.0f, 130.0f / wnd.getSize().y, 1.0f, 1.0f - (130.0f / wnd.getSize().y)));
 
     //Beginn der Endlosschleife, bis das Fenster geschlossen wird
     while (wnd.isOpen())
@@ -55,12 +54,13 @@ void LogWindow::run()
 
             if(event.type == sf::Event::Resized)
             {
-                menue.setSize(event.size.width, 100.0f);
-                menue.setCenter(event.size.width / 2.0f, 50.0f);
-                menue.setViewport(sf::FloatRect(0.0f, 0.0f, 1.0f, 100.0f / event.size.height));
+                menue.setSize(event.size.width, 130.0f);
+                menue.setCenter(event.size.width / 2.0f, 65.0f);
+                menue.setViewport(sf::FloatRect(0.0f, 0.0f, 1.0f, 130.0f / event.size.height));
 
-                simulation.setSize(event.size.width, event.size.height - 100.0f);
-                simulation.setViewport(sf::FloatRect(0.0f, 100.0f / event.size.height, 1.0f, 1.0f - (100.0f / event.size.height)));
+                simulation.setSize(event.size.width, event.size.height - 130.0f);
+                simulation.setViewport(
+                        sf::FloatRect(0.0f, 130.0f / event.size.height, 1.0f, 1.0f - (130.0f / event.size.height)));
             }
 
             if(event.type == sf::Event::MouseButtonPressed)
@@ -314,6 +314,59 @@ void LogWindow::run()
                         addGateType = -1;
                     }
                 }
+
+                if (action == 0)
+                {
+                    //open save dialog
+                    if (event.key.code == sf::Keyboard::S)
+                    {
+                        action = 1;
+                    }
+
+                    //open load dialog
+                    if (event.key.code == sf::Keyboard::L)
+                    {
+                        action = 2;
+                    }
+                }
+            }
+
+            if (event.type == sf::Event::KeyPressed)
+            {
+                //close open dialog
+                if (event.key.code == sf::Keyboard::Escape)
+                {
+                    action = 0;
+                    inputString = "";
+                }
+            }
+
+            if (event.type == sf::Event::TextEntered)
+            {
+                if (action != 0)
+                {
+                    if (static_cast<int>(event.text.unicode) == 13)
+                    {
+                        if (action == 1)
+                        {
+                            save(inputString);
+                        }
+                        else if (action == 2)
+                        {
+                            load(inputString);
+                        }
+                        inputString = "";
+                        action = 0;
+                    }
+                    else if (static_cast<int>(event.text.unicode) != 8)
+                    {
+                        inputString += static_cast<char>(event.text.unicode);
+                    }
+                    else if (inputString.size() > 0)
+                    {
+                        inputString.pop_back();
+                    }
+                }
             }
         }
         this->step();
@@ -340,6 +393,22 @@ void LogWindow::renderComponents()
     desc.setCharacterSize(12);
     wnd.draw(desc);
 
+    if (action == 1)
+    {
+        sf::Text cmd("Save as File: " + inputString, font);
+        cmd.setPosition(sf::Vector2f(10.0f, 100.0f));
+        cmd.setColor(sf::Color::Black);
+        cmd.setCharacterSize(16);
+        wnd.draw(cmd);
+    }
+    else if (action == 2)
+    {
+        sf::Text cmd("Load from File: " + inputString, font);
+        cmd.setPosition(sf::Vector2f(10.0f, 100.0f));
+        cmd.setColor(sf::Color::Black);
+        cmd.setCharacterSize(16);
+        wnd.draw(cmd);
+    }
 
     //Gatter und Verbindungen zeichnen
     wnd.setView(simulation);

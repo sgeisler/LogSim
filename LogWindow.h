@@ -54,6 +54,9 @@ private:
     //und welches typs es ist.
     int addGateType;
 
+    std::string inputString = "";
+    int action = 0;
+
 
     //Rotations-/Transformationsmatritzen f�r Men� und Zeichenfl�che
     sf::View menue;

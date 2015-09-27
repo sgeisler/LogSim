@@ -6,7 +6,7 @@ Dependencies:
 
 * SFML
 * nlohmann/json (as git module)
-* The font /usr/share/fonts/truetype/freefont/FreeSans.ttf (you can change the font path [here](https://github.com/sgeisler/LogSim/blob/master/LogWindow.cpp#L12))
+* The font `/usr/share/fonts/truetype/freefont/FreeSans.ttf` (you can change the font path [here](https://github.com/sgeisler/LogSim/blob/master/LogWindow.cpp#L12))
 
 How to use:
 -----------

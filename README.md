@@ -1,6 +1,8 @@
 LogSim
 ======
 
+LogSim is a little program to simulate binary logic. It was a school project and I won't maintain it any longer (since I don't think it has any real use for someone). I publish it under the MIT license (you can find it in the LICENSE file).
+
 Dependencies:
 -------------
 
@@ -18,6 +20,7 @@ How to use:
 * By scrolling you can zoom in and out.
 * Press 'D' to delete a gate or remove all connections from an in-/output.
 * 'W' changes the connection style.
+* Press 'S' or 'L' and enter a file name to save or load your/a previously saved workspace (thanks to nlohmann for his easy to use json-library).
 
 Screenshot:
 -----------
